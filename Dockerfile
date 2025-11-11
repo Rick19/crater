@@ -42,7 +42,7 @@ RUN cp .env.example .env
 
 # 8. Instalar dependencias de PHP
 # (Usamos la versión rápida sin dev para saltar el error del IdeHelper)
-RUN composer install --no-interaction --optimize-autoloader --no-dev --ignore-platform-reqs
+RUN composer install --no-interaction --optimize-autoloader --ignore-platform-reqs
 
 # 9. Ajustar permisos (Ahora .env SÍ existe)
 RUN chown -R www-data:www-data storage bootstrap/cache
