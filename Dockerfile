@@ -43,6 +43,7 @@ RUN composer install --no-interaction --optimize-autoloader --ignore-platform-re
 # 9. Ajustar permisos
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
+RUN chown www-data:www-data .env && chmod 664 .env
 
 # 10. Exponer el puerto 80 (el estándar de Apache)
 EXPOSE 80
