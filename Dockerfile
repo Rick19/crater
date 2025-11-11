@@ -37,10 +37,14 @@ WORKDIR /var/www/html
 # 7. Copiar los archivos del proyecto al contenedor
 COPY . .
 
-# 8. Instalar dependencias de PHP
-RUN composer install --no-interaction --optimize-autoloader --ignore-platform-reqs
+# 7.5 ¡LA LÍNEA CLAVE! Crear el .env
+RUN cp .env.example .env
 
-# 9. Ajustar permisos
+# 8. Instalar dependencias de PHP
+# (Usamos la versión rápida sin dev para saltar el error del IdeHelper)
+RUN composer install --no-interaction --optimize-autoloader --no-dev --ignore-platform-reqs
+
+# 9. Ajustar permisos (Ahora .env SÍ existe)
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
 RUN chown www-data:www-data .env && chmod 664 .env
