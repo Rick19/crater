@@ -45,6 +45,7 @@ RUN cp .env.example .env
 RUN composer install --no-interaction --optimize-autoloader --ignore-platform-reqs
 
 # 9. Ajustar permisos (Ahora .env SÍ existe)
+RUN chown -R www-data:www-data /var/www/html
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
 RUN chown www-data:www-data .env && chmod 664 .env
